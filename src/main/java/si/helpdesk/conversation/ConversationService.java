@@ -79,6 +79,13 @@ public class ConversationService {
         return dto;
     }
 
+    public List<ConversationDTO> listUserConversations(Long userId) {
+        return Conversation.findByUser(userId).stream().map(c -> {
+            Message first = Message.findFirstByConversation(c.id);
+            return ConversationDTO.from(c, first != null ? first.content : null);
+        }).toList();
+    }
+
     public List<MessageDTO> getMessages(Long conversationId, Long userId, Long since) {
         Conversation.findByIdAndUser(conversationId, userId)
                 .orElseThrow(() -> new ConversationNotFoundException(conversationId));

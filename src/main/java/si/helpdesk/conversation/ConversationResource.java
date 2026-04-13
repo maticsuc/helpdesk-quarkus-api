@@ -40,6 +40,14 @@ public class ConversationResource {
         return n.longValue();
     }
 
+    @GET
+    @Operation(summary = "List my conversations",
+               description = "Returns all conversations belonging to the authenticated user, newest first.")
+    @APIResponse(responseCode = "200", description = "List of conversations")
+    public List<ConversationDTO> listConversations() {
+        return conversationService.listUserConversations(getUserId());
+    }
+
     @POST
     @Operation(summary = "Start a new conversation",
                description = "Creates a new conversation in the given room with an initial message.")

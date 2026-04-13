@@ -47,4 +47,8 @@ public class Conversation extends PanacheEntityBase {
     public static Optional<Conversation> findByIdAndUser(Long id, Long userId) {
         return find("id = ?1 and user.id = ?2", id, userId).firstResultOptional();
     }
+
+    public static List<Conversation> findByUser(Long userId) {
+        return list("user.id = ?1 order by createdAt desc", userId);
+    }
 }
