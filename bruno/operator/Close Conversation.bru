@@ -1,0 +1,15 @@
+meta {
+  name: Close Conversation
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/operator/conversations/{{conversationId}}/close
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}

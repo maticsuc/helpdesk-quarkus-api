@@ -1,0 +1,19 @@
+meta {
+  name: List Conversations (PENDING)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/operator/conversations
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}
+
+query {
+  status: PENDING
+}

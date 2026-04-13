@@ -1,0 +1,21 @@
+meta {
+  name: Send Operator Message
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/operator/conversations/{{conversationId}}/messages
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}
+
+body:json {
+  {
+    "content": "Kako vam lahko pomagam?"
+  }
+}

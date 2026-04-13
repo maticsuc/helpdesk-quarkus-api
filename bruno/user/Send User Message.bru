@@ -1,0 +1,21 @@
+meta {
+  name: Send User Message
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/conversations/{{conversationId}}/messages
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "content": "Ali ste ga že resetirali?"
+  }
+}

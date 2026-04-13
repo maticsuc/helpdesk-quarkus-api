@@ -1,0 +1,22 @@
+meta {
+  name: Login Operator
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/auth/login/operator
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "operator1",
+    "password": "password123"
+  }
+}
+
+script:post-response {
+  bru.setVar("operatorToken", res.body.token);
+}

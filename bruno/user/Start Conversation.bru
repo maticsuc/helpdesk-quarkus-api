@@ -1,0 +1,26 @@
+meta {
+  name: Start Conversation
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/conversations
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "room": "TEHNIKA",
+    "message": "Moj printer ne dela."
+  }
+}
+
+script:post-response {
+  bru.setVar("conversationId", res.body.id);
+}

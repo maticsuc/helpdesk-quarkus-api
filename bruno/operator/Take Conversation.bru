@@ -1,0 +1,15 @@
+meta {
+  name: Take Conversation
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/operator/conversations/{{conversationId}}/take
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}
