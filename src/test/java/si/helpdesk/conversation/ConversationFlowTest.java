@@ -87,6 +87,52 @@ class ConversationFlowTest {
     }
 
     @Test
+    void testListConversations() {
+        // Create two conversations as janez
+        given()
+                .header("Authorization", "Bearer " + userToken)
+                .contentType(ContentType.JSON)
+                .body("{\"room\":\"TEHNIKA\",\"message\":\"Prva.\"}")
+                .when().post("/conversations").then().statusCode(201);
+
+        given()
+                .header("Authorization", "Bearer " + userToken)
+                .contentType(ContentType.JSON)
+                .body("{\"room\":\"STORITVE\",\"message\":\"Druga.\"}")
+                .when().post("/conversations").then().statusCode(201);
+
+        given()
+                .header("Authorization", "Bearer " + userToken)
+                .when()
+                .get("/conversations")
+                .then()
+                .statusCode(200)
+                .body("$", not(empty()))
+                .body("[0].status", notNullValue());
+    }
+
+    @Test
+    void testListConversationsDoesNotReturnOtherUsers() {
+        // Create a conversation as ana
+        String anaToken = TestUtils.loginUser("ana", "password123");
+        int anaConvId = given()
+                .header("Authorization", "Bearer " + anaToken)
+                .contentType(ContentType.JSON)
+                .body("{\"room\":\"POGOVOR\",\"message\":\"Ana conversation.\"}")
+                .when().post("/conversations").then().statusCode(201)
+                .extract().jsonPath().getInt("id");
+
+        // Janez's list must not contain ana's conversation
+        given()
+                .header("Authorization", "Bearer " + userToken)
+                .when()
+                .get("/conversations")
+                .then()
+                .statusCode(200)
+                .body("id", not(hasItem(anaConvId)));
+    }
+
+    @Test
     void testAccessWithoutToken() {
         given()
                 .when()
