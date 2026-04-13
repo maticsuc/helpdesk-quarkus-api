@@ -8,8 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Start the database (required before running the app)
 docker-compose up -d
 
-# Run in dev mode (live reload, Swagger UI at http://localhost:8080/q/swagger-ui)
-./mvnw quarkus:dev
+# Run in dev mode — local Docker (live reload, Swagger UI at http://localhost:8080/q/swagger-ui)
+quarkus dev
+
+# Run in dev mode — Supabase (fill in .env Supabase section first)
+quarkus dev -Dquarkus.profile=supabase
 
 # Run all tests (Testcontainers provisions its own PostgreSQL — no docker-compose needed)
 ./mvnw test
