@@ -2,7 +2,7 @@ package si.helpdesk.auth;
 
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.smallrye.jwt.build.Jwt;
-import io.smallrye.jwt.build.JwtSignatureBuilder;
+import io.smallrye.jwt.build.JwtClaimsBuilder;
 import io.smallrye.jwt.util.KeyUtils;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -37,7 +37,7 @@ public class AuthService {
         });
     }
 
-    private String sign(JwtSignatureBuilder builder) throws Exception {
+    private String sign(JwtClaimsBuilder builder) throws Exception {
         if (privateKey != null) {
             return builder.sign(privateKey);
         }
