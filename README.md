@@ -62,7 +62,11 @@ openssl rsa -in privateKey.pem -pubout -out publicKey.pem
 
 `docker-compose.yml` bind-mounts these files into the container at `/app/privateKey.pem` and `/app/publicKey.pem`. They are excluded from the Docker image via `.dockerignore` — they never get baked in.
 
-### 3. Setup Environment Variables
+### 3. Setup Database (one-time)
+
+Run [`create.sql`](create.sql) in the Supabase SQL editor to create the schema.
+
+### 4. Setup Environment Variables
 
 ```bash
 cp .env.example .env
@@ -77,10 +81,6 @@ DB_NAME=postgres
 DB_USER=postgres.<project-ref>
 DB_PASSWORD=<password>
 ```
-
-### 4. Set up the database (one-time)
-
-Run [`create.sql`](create.sql) in the Supabase SQL editor to create the schema.
 
 ### 5. Build and run
 
