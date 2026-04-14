@@ -96,7 +96,9 @@ This builds the image from source and starts the container. The app will be avai
 ./mvnw test
 ```
 
-No database setup needed — tests provision their own PostgreSQL via Testcontainers.
+30 tests covering authentication, conversation flows, and SSE streaming. No database setup needed — Testcontainers auto-provisions PostgreSQL.
+
+**See [src/test/TESTS.md](src/test/TESTS.md) for all commands and test details.**
 
 ## Seeded accounts
 
