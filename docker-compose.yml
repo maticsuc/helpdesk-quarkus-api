@@ -6,5 +6,8 @@ services:
       - "8080:8080"
     env_file: .env
     environment:
-      QUARKUS_PROFILE: supabase
+      QUARKUS_PROFILE: prod
+    volumes:
+      - ./privateKey.pem:/app/privateKey.pem:ro
+      - ./publicKey.pem:/app/publicKey.pem:ro
     restart: unless-stopped

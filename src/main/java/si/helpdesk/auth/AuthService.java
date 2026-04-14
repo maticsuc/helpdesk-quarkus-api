@@ -10,9 +10,10 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import si.helpdesk.operator.Operator;
 import si.helpdesk.user.User;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.PrivateKey;
 import java.time.Duration;
-import java.util.Optional;
 import java.util.Set;
 
 @ApplicationScoped
@@ -21,20 +22,20 @@ public class AuthService {
     private static final long EXPIRES_IN_SECONDS = 3600L;
     private static final String ISSUER = "https://helpdesk.si";
 
-    @ConfigProperty(name = "jwt.private.key")
-    Optional<String> privateKeyPem;
+    @ConfigProperty(name = "jwt.private.key.location", defaultValue = "")
+    String privateKeyPath;
 
     private PrivateKey privateKey;
 
     @PostConstruct
     void init() {
-        privateKeyPem.filter(s -> !s.isBlank()).ifPresent(pem -> {
+        if (!privateKeyPath.isBlank()) {
             try {
-                privateKey = KeyUtils.decodePrivateKey(pem);
+                privateKey = KeyUtils.decodePrivateKey(Files.readString(Path.of(privateKeyPath)));
             } catch (Exception e) {
-                throw new RuntimeException("Failed to decode JWT_PRIVATE_KEY", e);
+                throw new RuntimeException("Failed to load private key from: " + privateKeyPath, e);
             }
-        });
+        }
     }
 
     private String sign(JwtClaimsBuilder builder) throws Exception {
