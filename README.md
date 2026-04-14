@@ -40,11 +40,16 @@ Hibernate drops and recreates the schema on every startup (`drop-and-create`) an
 
 ## Deployment
 
-**Prerequisites:** Docker, Docker Compose
+Deploy with Docker Compose on a server or cloud VM. Use Supabase for the managed PostgreSQL database in production.
+
+**Prerequisites:** Docker, Docker Compose, Supabase
 
 ### 1. Clone the repo
 
-Same as local dev.
+```bash
+git clone https://github.com/maticsuc/helpdesk-quarkus-api.git
+cd helpdesk-quarkus-api
+```
 
 ### 2. Generate JWT keys
 
@@ -57,7 +62,7 @@ openssl rsa -in privateKey.pem -pubout -out publicKey.pem
 
 `docker-compose.yml` bind-mounts these files into the container at `/app/privateKey.pem` and `/app/publicKey.pem`. They are excluded from the Docker image via `.dockerignore` — they never get baked in.
 
-### 3. Set up .env
+### 3. Setup Environment Variables
 
 ```bash
 cp .env.example .env
