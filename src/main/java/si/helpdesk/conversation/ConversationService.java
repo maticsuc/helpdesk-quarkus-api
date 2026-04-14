@@ -45,6 +45,7 @@ public class ConversationService {
         return ConversationDTO.from(conv, request.message);
     }
 
+    @Transactional
     public ConversationDTO getConversation(Long conversationId, Long userId) {
         Conversation conv = Conversation.findByIdAndUser(conversationId, userId)
                 .orElseThrow(() -> new ConversationNotFoundException(conversationId));
@@ -79,6 +80,7 @@ public class ConversationService {
         return dto;
     }
 
+    @Transactional
     public List<ConversationDTO> listUserConversations(Long userId) {
         return Conversation.findByUser(userId).stream().map(c -> {
             Message first = Message.findFirstByConversation(c.id);
@@ -86,6 +88,7 @@ public class ConversationService {
         }).toList();
     }
 
+    @Transactional
     public List<MessageDTO> getMessages(Long conversationId, Long userId, Long since) {
         Conversation.findByIdAndUser(conversationId, userId)
                 .orElseThrow(() -> new ConversationNotFoundException(conversationId));
@@ -98,6 +101,7 @@ public class ConversationService {
 
     // Operator methods
 
+    @Transactional
     public List<ConversationDTO> listConversations(ConversationStatus status) {
         List<Conversation> conversations = status != null
                 ? Conversation.findByStatus(status)
@@ -156,6 +160,7 @@ public class ConversationService {
         return dto;
     }
 
+    @Transactional
     public List<MessageDTO> getOperatorMessages(Long conversationId, Long operatorId, Long since) {
         Conversation conv = Conversation.findById(conversationId);
         if (conv == null) {
