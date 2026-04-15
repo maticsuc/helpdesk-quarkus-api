@@ -2,6 +2,15 @@
 
 Quarkus REST API for a two-sided help desk — mobile users and browser-based operators.
 
+## Live Demo
+
+A production instance is hosted on Hetzner and available for testing:
+
+- **API:** http://178.104.200.66/api/
+- **Web Client:** http://178.104.200.66
+
+The web client provides a complete interface for interacting with all API endpoints. Source code: [helpdesk-vite-client](https://github.com/maticsuc/helpdesk-vite-client)
+
 ## Local Development
 
 **Prerequisites:** Java 21, Quarkus CLI, Docker
