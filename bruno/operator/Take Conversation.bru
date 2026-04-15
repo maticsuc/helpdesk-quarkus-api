@@ -1,12 +1,12 @@
 meta {
   name: Take Conversation
   type: http
-  seq: 3
+  seq: 8
 }
 
 post {
   url: {{baseUrl}}/operator/conversations/{{conversationId}}/take
-  body: none
+  body: json
   auth: bearer
 }
 

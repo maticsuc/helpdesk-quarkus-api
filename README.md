@@ -109,6 +109,6 @@ Password for all: `password123`
 | User     | `janez`, `ana` |
 | Operator | `operator1`, `operator2` |
 
-## Bruno collection
+## Bruno API Collection
 
-Open the `bruno/` folder in [Bruno](https://www.usebruno.com/), select the **local** environment, and run **Login User** or **Login Operator** first to populate the `token` variable.
+19 requests covering all endpoints. Open `bruno/`, select `local` or `production` environment, and click "Run Collection" to test the full helpdesk workflow (PENDING → ACTIVE → CLOSED).

@@ -1,0 +1,20 @@
+meta {
+  name: List All Conversations
+  type: http
+  seq: 18
+}
+
+get {
+  url: {{baseUrl}}/operator/conversations
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}
+
+docs {
+  List ALL conversations without status filter.
+  Returns PENDING, ACTIVE, and CLOSED conversations.
+}

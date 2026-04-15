@@ -1,12 +1,12 @@
 meta {
   name: Close Conversation
   type: http
-  seq: 6
+  seq: 15
 }
 
 put {
   url: {{baseUrl}}/operator/conversations/{{conversationId}}/close
-  body: none
+  body: json
   auth: bearer
 }
 

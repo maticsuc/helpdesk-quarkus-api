@@ -1,0 +1,26 @@
+meta {
+  name: Get Messages (with polling)
+  type: http
+  seq: 14
+}
+
+get {
+  url: {{baseUrl}}/operator/conversations/{{conversationId}}/messages
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{operatorToken}}
+}
+
+query {
+  since: 5
+}
+
+docs {
+  Example showing polling usage with the 'since' parameter.
+  Returns only messages with ID > 5.
+  
+  Use this for polling new messages instead of SSE if preferred.
+}

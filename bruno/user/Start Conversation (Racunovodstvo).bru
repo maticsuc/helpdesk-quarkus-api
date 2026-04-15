@@ -1,0 +1,27 @@
+meta {
+  name: Start Conversation (Racunovodstvo)
+  type: http
+  seq: 19
+}
+
+post {
+  url: {{baseUrl}}/conversations
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "room": "RACUNOVODSTVO",
+    "message": "Imam vprašanje glede fakture."
+  }
+}
+
+docs {
+  Alternative example: Starting a conversation in the RACUNOVODSTVO (Accounting) room.
+  Note: This will overwrite conversationId variable if run in sequence.
+}
